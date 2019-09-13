@@ -1,0 +1,10 @@
+Installing Bettercap
+------------------------------
+sudo apt-get install bettercap
+==============================
+starting Bettercap
+------------------------------
+bettercap
+help
+net.probe on
+net.show
